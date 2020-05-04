@@ -35,10 +35,12 @@ let arr = [],
       domains.push( domain )
 	  	  
       request(`https://${domain}`, function (error, response) {
-	   try {
-	    if(error.code == "ECONNRESET") return;
-	   }catch(err){}
-       	   
+	try {
+	  if(error.code == "ECONNRESET") return;
+	}catch(err){}
+	      
+       if(error) return;
+	      
        if ( response.statusCode == 404 ) {
         require( "fs-extra" ).appendFile( "found.txt", "https://" + domain + "\r\n" )
 		console.log(`https://${domain} does NOT exists \r\n`)
