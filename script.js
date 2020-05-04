@@ -36,10 +36,10 @@ let arr = [],
 	  	  
       request(`https://${domain}`, function (error, response) {
 	try {
-	  if(error.code == "ECONNRESET") return;
+	  if( error.code == "ECONNRESET" ) return;
 	}catch(err){}
 	      
-       if(error) return;
+       if( typeof response.statusCode === 'undefined' || typeof response === 'undefined' ) return;
 	      
        if ( response.statusCode == 404 ) {
         require( "fs-extra" ).appendFile( "found.txt", "https://" + domain + "\r\n" )
