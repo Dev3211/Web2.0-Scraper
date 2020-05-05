@@ -1,3 +1,5 @@
+process.on('uncaughtException', function (err) {});
+
 require( 'events' ).EventEmitter.prototype._maxListeners = 0;
 
 let [ search_engine, util, url, request ] = [ require( 'search-engine-nodejs' ).default, require( 'util' ), require( 'url' ), require( 'req-fast') ]
@@ -39,7 +41,7 @@ let arr = [],
 	  if( error.code == "ECONNRESET" ) return;
 	}catch(err){}
 	      
-       if( typeof response.statusCode === 'undefined' || typeof response === 'undefined' ) return;
+       if( typeof response === 'undefined' ) return;
 	      
        if ( response.statusCode == 404 ) {
         require( "fs-extra" ).appendFile( "found.txt", "https://" + domain + "\r\n" )
